@@ -107,9 +107,7 @@ main section:first-of-type {
     color: var(--co-white);
     text-shadow: 0 0 20px var(--co-white-2);
 }
-#my-contacts {
-    display: none;
-}
+
 .cont-contacts-user {
     color: var(--co-white);
     position: absolute;
@@ -125,7 +123,7 @@ main section:first-of-type {
     align-items: center;
     padding: 1rem 0;
     gap: .5rem;
-    width: 50vw;
+    width: 55vw;
     height: 100vh;
     background-color: var(--co-blue-dark);
     position: relative;
@@ -152,11 +150,27 @@ table td {
     font-size: .9rem;
     text-align: center;
 }
+.border-td {
+    border: 1.5px solid var(--co-gray);
+    border-radius: 8px;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    gap: .2rem;
+}
+tbody td button {
+    border-radius: 5px;
+    cursor: pointer;
+}
+tbody td button:first-child {
+    background-color: var(--co);
+}
 #inputSearhUser {
     width: 300px;
     padding: .5rem 1rem;
     text-align: center;
-    border-radius: 20px;
+    border-radius: var(--size-20-px);
 }
 #btnClose {
     cursor: pointer;
@@ -169,6 +183,9 @@ table td {
 }
 #btnClose:hover {
     filter: brightness(75%);
+}
+#amount-users {
+    text-align: center;
 }
 .flip-in-ver-right {
 	-webkit-animation: flip-in-ver-right 1.5s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
@@ -198,6 +215,38 @@ table td {
       opacity: 1;
     }
   }
+  .slide-in-fwd-left {
+    -webkit-animation: slide-in-fwd-left 1.4s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
+    animation: slide-in-fwd-left 1.4s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
+}
+
+@-webkit-keyframes slide-in-fwd-left {
+    0% {
+        -webkit-transform: translateZ(-1400px) translateX(-1000px);
+        transform: translateZ(-1400px) translateX(-1000px);
+        opacity: 0;
+    }
+
+    100% {
+        -webkit-transform: translateZ(0) translateX(0);
+        transform: translateZ(0) translateX(0);
+        opacity: 1;
+    }
+}
+
+@keyframes slide-in-fwd-left {
+    0% {
+        -webkit-transform: translateZ(-1400px) translateX(-1000px);
+        transform: translateZ(-1400px) translateX(-1000px);
+        opacity: 0;
+    }
+
+    100% {
+        -webkit-transform: translateZ(0) translateX(0);
+        transform: translateZ(0) translateX(0);
+        opacity: 1;
+    }
+}
 
   @media screen and (max-width: 768px) {
     #co-message {
@@ -208,5 +257,15 @@ table td {
     }
     .div-btns {
         width: 90%;
+    }
+    .cont-contacts-user section {
+        width: 100%;
+    }
+    #inputSearhUser {
+        width: 275px;
+        font-size: .8rem;
+    }
+    #btnClose {
+        right: .5rem;
     }
 }
