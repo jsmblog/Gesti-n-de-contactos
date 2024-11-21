@@ -8,7 +8,7 @@ const CONTENT_CONTACTS = document.querySelector('.cont-contacts-user')
 const usersToFilter = document.getElementById('inputSearhUser');
 const tBody = document.getElementById('tBody');
 let amountUsers = document.getElementById('amount-users');
-const GET_DATA_LOCALSTORAGE = JSON.parse(localStorage.getItem('users'));
+const GET_DATA_LOCALSTORAGE = JSON.parse(localStorage.getItem('users')) || [];
 const MESSAGE_WELCOME = document.getElementById('co-message');
 const tagsInputs = document.querySelectorAll('input[name="tag"]');
 const btnClose = document.getElementById('btnClose')
@@ -258,7 +258,7 @@ SAVE_USER.addEventListener('click', () => {
 
 const FILTER = (e) => {
     const txtToFilter = e.target.value.toLowerCase();
-    const filteredUsers = GET_DATA_LOCALSTORAGE.filter(user => user.name.toLowerCase().includes(txtToFilter));
+    const filteredUsers = GET_DATA_LOCALSTORAGE.filter(user => user.name.toLowerCase().includes(txtToFilter) || user.tag.toLowerCase().includes(txtToFilter));
     T_BODY(filteredUsers);
     if (filteredUsers.length > 0) {
         amountUsers.innerHTML = `${filteredUsers.length} ${filteredUsers.length > 1 ? 'usuarios' : 'usuario'} coinciden con ${txtToFilter}`;
