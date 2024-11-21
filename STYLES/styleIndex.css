@@ -1,0 +1,118 @@
+* {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    border: none;
+    text-decoration: none;
+    box-sizing: border-box;
+}
+.text-shadow-white {
+    color: var(--co-white);
+    text-shadow: 0 0 20px var(--co-white-2);
+}
+
+:root {
+    --co-blue-dark:#020d16;
+    --co-white :white;
+    --co-white-2:rgba(255, 255, 255, 0.616);
+    --co-white-dark-1: rgba(255, 255, 255, 0.196);
+    --co-gray:#8a8a8a;
+    --size-15-px:15px;
+    --size-20-px:20px;
+}
+body {
+    background-color: var(--co-blue-dark);
+}
+main {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-evenly;
+}
+
+main label input {
+padding: .5rem 1rem;
+border-radius: var(--size-20-px);
+color: var(--co-blue-dark);
+width: 300px;
+}
+input[type="checkbox"] {
+ width: 30px;
+}
+main section:first-of-type {
+    border: 1px solid var(--co-white-2);
+    border-radius: var(--size-15-px);
+    box-shadow: 0 10px 10px -5px var(--co-white-dark-1);
+    padding: 1rem;
+    min-width: 50vw;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    min-height: 60vh;
+    max-height: 60vh;
+}
+#btn-saved-info-user {
+    cursor: pointer;
+    padding: 1rem 2rem;
+    background-color: var(--co-blue-dark);
+    border: 1px solid var(--co-white-2);
+    border-radius: var(--size-15-px);
+}
+#btn-saved-info-user:hover {
+    background-color: var(--co-white-2);
+    color: var(--co-blue-dark);
+    transition: .5s ease-in-out ;
+    transform: scale(1.05);    
+}
+#showSms {
+    color: var(--co-white);
+    display: none;
+    background-color: var(--co-blue-dark);
+    border: 1px solid var(--co-white-2);
+    font-weight: 900;
+    border-radius: var(--size-15-px);
+    padding: 1rem;
+    position: absolute;
+    bottom: 1.5rem;
+    right: 1rem;
+    z-index: 999;
+}
+.flip-in-ver-right {
+	-webkit-animation: flip-in-ver-right 1.5s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
+	        animation: flip-in-ver-right 1.5s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
+}
+@-webkit-keyframes flip-in-ver-right {
+    0% {
+      -webkit-transform: rotateY(-80deg);
+              transform: rotateY(-80deg);
+      opacity: 0;
+    }
+    100% {
+      -webkit-transform: rotateY(0);
+              transform: rotateY(0);
+      opacity: 1;
+    }
+  }
+  @keyframes flip-in-ver-right {
+    0% {
+      -webkit-transform: rotateY(-80deg);
+              transform: rotateY(-80deg);
+      opacity: 0;
+    }
+    100% {
+      -webkit-transform: rotateY(0);
+              transform: rotateY(0);
+      opacity: 1;
+    }
+  }
+
+  @media screen and (max-width: 768px) {
+    #co-message {
+        font-size: 1.5rem;
+    }
+    main section:first-of-type{
+        min-width: 90vw;
+    }
+}
