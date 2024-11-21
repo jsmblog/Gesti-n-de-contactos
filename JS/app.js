@@ -1,10 +1,16 @@
+'use strict';
 const nameInput = document.getElementById('nameInput');
 const contactInput = document.getElementById('contactInput');
 const emailInput = document.getElementById('emailInput');
 const SAVE_USER = document.getElementById('btn-saved-info-user');
+const myContacts = document.getElementById('my-contacts');
+const CONTENT_CONTACTS = document.querySelector('.cont-contacts-user')
+const usersToFilter = document.getElementById('inputSearhUser');
+const tBody = document.getElementById('tBody');
+const GET_DATA_LOCALSTORAGE = JSON.parse(localStorage.getItem('users'));
 const MESSAGE_WELCOME =  document.getElementById('co-message');
 const tagsInputs = document.querySelectorAll('input[name="tag"]');
-
+const btnClose = document.getElementById('btnClose')
 const MESSAGE = '¡ Gestiona tus usuarios , ahora !';
 let index = 0;
 const interval = setInterval(() => {
@@ -16,48 +22,40 @@ const interval = setInterval(() => {
     }
 }, 100);
 
-// const T_BODY = (array) => {
-//     tBody.innerHTML = '';
+const T_BODY = (array) => {
+    tBody.innerHTML = '';
 
-//     if (!Array.isArray(array)) {
-//         console.error("Expected an array, but received:", array);
-//         return;
-//     }
+    array.forEach((user) => {
+        const { id, name, contact, email, tag} = user;
+        tBody.innerHTML += `
+        <tr>
+            <td>${id}</td>
+            <td>${name}</td>
+            <td>${contact}</td>
+            <td>${email}</td>
+            <td>${tag}</td>
+            <td class="border-td">
+                <button class="btn-delete" data-id="${id}">🗑️</button>
+                <button class="btn-edit" data-id="${id}">✏️</button>
+            </td>
+        </tr>`;
+    });
 
-//     array.forEach((user) => {
-//         const { id, name, lastname, dni, dateOfBirth, age, descriptionUser, gender } = user;
-//         tBody.innerHTML += `
-//         <tr>
-//             <td>${id}</td>
-//             <td>${sliceText(name, 10)}</td>
-//             <td>${lastname}</td>
-//             <td>${dni}</td>
-//             <td>${dateOfBirth}</td>
-//             <td>${age}</td>
-//             <td>${gender}</td>
-//             <td title=${descriptionUser}>${sliceText(descriptionUser, 10)}</td>
-//             <td class="border-td">
-//                 <button class="btn-delete" data-id="${id}">🗑️</button>
-//                 <button class="btn-edit" data-id="${id}">✏️</button>
-//             </td>
-//         </tr>`;
-//     });
+    document.querySelectorAll('.btn-delete').forEach(button => {
+        button.addEventListener('click', () => {
+            const id = button.getAttribute('data-id');
+            deleteUser(id);
+        });
+    });
 
-//     document.querySelectorAll('.btn-delete').forEach(button => {
-//         button.addEventListener('click', () => {
-//             const id = button.getAttribute('data-id');
-//             deleteUser(id);
-//         });
-//     });
-
-//     document.querySelectorAll('.btn-edit').forEach(button => {
-//         button.addEventListener('click', () => {
-//             const id = button.getAttribute('data-id');
-//             editUser(id);
-//         });
-//     });
-// };
-
+    document.querySelectorAll('.btn-edit').forEach(button => {
+        button.addEventListener('click', () => {
+            const id = button.getAttribute('data-id');
+            editUser(id);
+        });
+    });
+};
+T_BODY(GET_DATA_LOCALSTORAGE)
 const generatedIdRandom = () => {
     const options = 'abcdefghijklmnñopqrstuvwxyzABCDEFGHIJKLMNÑOPQRSTUVWXYZ0123456789'
     const ID_LENGTH = 10;
@@ -90,7 +88,9 @@ const displayMessage = (message) => {
         popUp.innerHTML = '';
     }, 5000);
 };
-
+if(GET_DATA_LOCALSTORAGE.length > 0 ){
+    myContacts.style.display = 'inline-flex'
+}
 const isEmpty = (value) => {
     return value === '';
 }
@@ -100,7 +100,7 @@ const fillTbody = (user) => {
     localStorage.setItem('users', JSON.stringify(users));
     displayMessage('¡ usuario añadido !');
     const DATA_LOCALSTORAGE = JSON.parse(localStorage.getItem('users'));
-    // T_BODY(DATA_LOCALSTORAGE);
+    T_BODY(DATA_LOCALSTORAGE);
 }
 
 const validateData = () => {
@@ -163,6 +163,16 @@ const validateData = () => {
 const UP_INFO = () => {
     validateData();
 }
+const openContentContacts = () => {
+CONTENT_CONTACTS.style.display = 'inline-flex'
+}
+const closeContentContacts = () => {
+    CONTENT_CONTACTS.style.display = 'none'
+}
+
+myContacts.addEventListener('click', openContentContacts)
+btnClose.addEventListener('click', closeContentContacts)
+
 SAVE_USER.addEventListener('click', () => {
     // const editingUserId = localStorage.getItem('editingUserId');
     // if (editingUserId) {
@@ -171,3 +181,16 @@ SAVE_USER.addEventListener('click', () => {
         UP_INFO();
     // }
 });
+const FILTER = (e) => {
+    const txtToFilter = e.target.value.toLowerCase();
+    const filteredUsers = GET_DATA_LOCALSTORAGE.filter(user => user.name.toLowerCase().includes(txtToFilter));
+    T_BODY(filteredUsers);
+    // if(filteredUsers.length > 0){
+    //     amountUsers.innerHTML = `${filteredUsers.length} ${filteredUsers.length > 1 ? 'usuarios' : 'usuario'} coinciden con ${txtToFilter}`;
+    // }else {
+    //     amountUsers.innerHTML = `No se encontró usuarios que coincidan con ${txtToFilter}`
+    // }
+    // if(txtToFilter === '') amountUsers.textContent = `${PEOPLES.length} usuarios registrados`
+}
+
+usersToFilter.addEventListener('input', (e) => FILTER(e));

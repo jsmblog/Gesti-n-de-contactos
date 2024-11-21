@@ -24,10 +24,41 @@
                     <label class="text-shadow-white">Trabajo<input type="checkbox" name="tag" value="work"></label>
                 </div>
         </section>
-        <button id="btn-saved-info-user" class="text-shadow-white">
-            Hecho
-        </button>
+        <div class="div-btns">
+            <button id="btn-saved-info-user" class="text-shadow-white">
+                Hecho
+            </button>
+            <button id="my-contacts">
+                mis contactos
+            </button>
+        </div>
     </main>
+    <div class="cont-contacts-user">
+        <section>
+            <button id="btnClose">
+                X
+            </button>
+            <label>
+                <input id="inputSearhUser" type="text" placeholder="Busca un contacto por su nombre 🔍">
+            </label>
+            <div class="cont-contacts-table">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>NOMBRES</th>
+                            <th>CONTACTO</th>
+                            <th>EMAIL</th>
+                            <th>ETIQUETA</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody id="tBody">
+                    </tbody>
+                </table>
+            </div>
+        </section>
+    </div>
     <script type="module" src="./JS/app.js"></script>
 </body>
 
